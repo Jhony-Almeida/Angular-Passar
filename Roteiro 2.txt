@@ -1,0 +1,141 @@
+No terminal usar -> npm install -D json-server json-server-auth
+
+Criar um novo arquivo na pagina principal do angular
+com o nome: db.json
+
+Dentro do arquivo db.json colocar:
+
+{
+    "users": []  
+
+}
+
+No terminal colocar selecionado o arquivo db.json(precaução): 
+json-server db.json -m ./node_modules/json-server-auth  (npx json-server --watch db.json)(Esse funcionou)
+
+http://localhost:3000/users
+
+Usar 2 terminais ao mesmo tempo
+
+no db.json, dentro do [] no "users" colocar:
+
+{
+    "email": "olvier@mail.com"
+    "password": "bestPass0rd"
+}
+
+testar dnv
+
+===============================================================
+
+No insomnia:
+
+
+nomear o projeto: consultar
+
+colocar no GET
+
+colocar o endereço: http://localhost:3000/users , Send
+
+Remover do db.json no visual studio:
+ "email": "olvier@mail.com"
+ "password": "bestPass0rd"
+
+criar um nova aba com nome: criar user, POST
+
+Body -> JSON, colocar:
+
+{
+    "email": "adriano@email.com"
+    "passoword": "senhadoadriano"
+}
+
+clicar em Send
+
+mudar para:
+
+{
+    "email": "senai@email.com",
+    "passoword": "senhadosenai"
+}
+
+Send
+
+===============================================================
+
+No Postman:
+
+Fazer o GET 
+
+e outro POST -> body -> raw -> marcar JSON
+
+{
+    "email": "develop@email.com"
+    "passoword": "senhadodevelop"
+}
+
+SEND
+
+olhar o GET dnv
+
+
+======================================================
+
+no Visual Studio Code:
+
+no app.module.ts:
+
+import { httpClientModule } from "@angular/common/http"
+
+no imports (lembrar da virgula): HttpClientModule
+
+no terminal usar -> ng generate service services/login
+
+na mesma pasta 
+
+no constructor no (private httpClient: HttpClient) { } 
+5 espaços         url = "http://localhost:3000/login"
+
+importar HttpClient
+
+abaixo do constructor
+
+login(usuario: User): Observable<any>{
+  return this.httpClient.post(this.url, JSON.stringify(usuario), {
+   headers: new HttpHeaders('Content-Type': 'application/json'}),
+   observe:"response"
+  })
+  }
+}
+    
+==============================
+login.components.ts
+
+no constructor(private: loginService:LoginService) { }
+
+vai importar o LoginService
+
+no receberDados() {this.loginService.login (this.userModel).subscribe((response) => {
+     console.log(response)
+     })
+
+     }
+
+}
+
+comentar console.log(this.userModel)
+
+ng serve
+
+
+
+
+
+
+
+
+
+
+
+
+
